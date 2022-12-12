@@ -92,8 +92,9 @@ class SINGLYLINKEDLIST{
         list.printList();
         list.deleteFirst();
         list.deleteLast();
-        list.deleteFirst();
         list.printList();
+        System.out.println(list.getSize());
+        list.addFirst("This");
         System.out.println(list.getSize());
     }
 }
