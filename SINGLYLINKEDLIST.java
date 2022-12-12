@@ -34,7 +34,20 @@ class SINGLYLINKEDLIST{
         while(temp.next!=null)
             temp = temp.next;
         temp.next = newNode;
-        
+    }
+    public void addMiddle(String data,int pos){
+        Node newNode = new Node(data);
+        if(pos == 0){
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        Node prev = head;
+        for(int i=0;i<pos-1;i++){
+            prev = prev.next;
+        }
+        newNode.next = prev.next;
+        prev.next = newNode;
     }
     //Displaying the data present in the linkedlist
     public void printList(){
@@ -56,6 +69,36 @@ class SINGLYLINKEDLIST{
         }
         size--;
         head = head.next;
+    }
+    public void deleteMiddle(int pos){
+        if(pos == 0){
+            head = head.next;
+            return;
+        }
+        Node prev = head;
+        for(int i=0;i<pos-1;i++)
+            prev = prev.next;
+        prev.next = prev.next.next;
+    }
+
+    public void deleteByKey(String key){
+        Node curr = head,prev = null;
+        if(curr != null && curr.data == key){
+            head = curr.next;
+            System.out.println(key + " found and deleted");
+            return;
+        }
+        while(curr != null && curr.data != key){
+            prev = curr;
+            curr = curr.next;
+        }
+        if(curr != null){
+            prev.next = curr.next;
+            System.out.println(key + " found and deleted");
+        }
+        if (curr == null) {
+            System.out.println(key + " not found");
+        }
     }
     //Deleting a node from the last
     public void deleteLast(){
@@ -96,5 +139,11 @@ class SINGLYLINKEDLIST{
         System.out.println(list.getSize());
         list.addFirst("This");
         System.out.println(list.getSize());
+        list.addMiddle("Hello",2);
+        list.printList();
+        list.deleteMiddle(1);
+        list.printList();
+        list.deleteByKey("Hello");
+        list.printList();
     }
 }
